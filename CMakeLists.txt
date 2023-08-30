@@ -18,17 +18,29 @@ set(CMAKE_MODULE_PATH $ENV{CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 message("CMAKE_MODULE_PATH: ${CMAKE_MODULE_PATH}")
 
 # Find the ARGoS package, make sure to save the ARGoS prefix
-find_package(PkgConfig)
-pkg_check_modules(ARGOS REQUIRED argos3_simulator)
-set(ARGOS_PREFIX ${ARGOS_PREFIX} CACHE INTERNAL "")
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ARGOS_PREFIX}/share/argos3/cmake)
+
+                      # find_package(PkgConfig)
+                      # pkg_check_modules(ARGOS REQUIRED argos3core_simulator)
+                      # set(ARGOS_PREFIX ${ARGOS_PREFIX} CACHE INTERNAL "")
+                      # set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ARGOS_PREFIX}/share/argos3/cmake)
+
+############ FROM CPFA ############
+find_package(ARGoS REQUIRED)
+include_directories(${CMAKE_SOURCE_DIR} ${ARGOS_INCLUDE_DIRS})
+link_directories(${ARGOS_LIBRARY_DIR})
+link_libraries(${ARGOS_LDFLAGS})
+
+
+
+
+
 
 # Check whether all the necessary libs have been installed to compile the
 # code that depends on Qt and OpenGL
-include(ARGoSCheckQTOpenGL)
+# include(ARGoSCheckQTOpenGL)
 
 # Find Lua
-find_package(Lua52 REQUIRED)
+find_package(Lua REQUIRED)
 
 # Find the GSL package
 find_package(GSL REQUIRED)
@@ -40,6 +52,10 @@ include_directories(${CMAKE_SOURCE_DIR} ${ARGOS_INCLUDE_DIRS} ${GSL_INCLUDE_DIR}
   
 # Set ARGoS link dir
 link_directories(${ARGOS_LIBRARY_DIRS}) 
+
+# Find the boost filesystem package.
+find_package( Boost REQUIRED COMPONENTS system filesystem )
+include_directories( ${Boost_INCLUDE_DIRS} )
 
 # Descend into the controllers directory
 add_subdirectory(controllers)

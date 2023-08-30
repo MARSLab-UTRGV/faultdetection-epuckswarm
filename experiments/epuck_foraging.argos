@@ -122,7 +122,7 @@
   <!-- ****************** -->
   <!-- * Visualization * -->
   <!-- ****************** -->
-  <visualization>
+  <!-- <visualization>
     <qt-opengl>
       <camera>
         <placement idx="0"
@@ -136,6 +136,6 @@
 
       <user_functions label="foraging_qt_user_functions" />
     </qt-opengl>
-  </visualization>
+  </visualization> -->
 
 </argos-configuration>
