@@ -55,6 +55,8 @@ public:
 
     virtual void PrintBehaviorIdentity();
 
+    virtual std::string GetBehaviorIdentity();
+
     virtual void WheelSpeedsFromHeadingVector(CVector2 &m_cHeadingVector, Real &fLeftWheelSpeed, Real &fRightWheelSpeed);
 
     struct RobotData

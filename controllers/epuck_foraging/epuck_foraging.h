@@ -650,7 +650,7 @@ private:
 
     CRMinRobotAgentOptimised*     crminAgent;
 
-
+    bool                        printedFaultStatus = false;
 
     /* Pointer to the differential steering actuator */
     CCI_DifferentialSteeringActuator* m_pcWheels;

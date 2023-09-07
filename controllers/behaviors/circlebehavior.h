@@ -24,6 +24,8 @@ public:
 
     virtual void PrintBehaviorIdentity();
 
+    virtual std::string GetBehaviorIdentity();
+
 
 protected:
 

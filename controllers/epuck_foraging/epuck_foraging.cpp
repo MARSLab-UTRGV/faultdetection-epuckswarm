@@ -468,6 +468,62 @@ void CEPuckForaging::ControlStep()
             if (bControlTaken)
             {
                 (*i)->Action(leftSpeed, rightSpeed);
+                
+                // Get the fault name from the enum variable FBehvaior using a switch
+                std::string faultname;
+                switch (m_sExpRun.FBehavior){
+                    case 1:
+                        faultname = "FAULT_STRAIGHTLINE";
+                        break;
+                    case 2:
+                        faultname = "FAULT_RANDOMWALK";
+                        break;
+                    case 3:
+                        faultname = "FAULT_CIRCLE";
+                        break;
+                    case 4:
+                        faultname = "FAULT_STOP";
+                        break;
+                    case 5:
+                        faultname = "FAULT_PROXIMITYSENSORS_SETMIN";
+                        break;
+                    case 6:
+                        faultname = "FAULT_PROXIMITYSENSORS_SETMAX";
+                        break;
+                    case 7:
+                        faultname = "FAULT_PROXIMITYSENSORS_SETRANDOM";
+                        break;
+                    case 8:
+                        faultname = "FAULT_PROXIMITYSENSORS_SETOFFSET";
+                        break;
+                    case 9:
+                        faultname = "FAULT_RABSENSOR_SETOFFSET";
+                        break;
+                    case 10:
+                        faultname = "FAULT_RABSENSOR_MISSINGRECEIVERS";
+                        break;
+                    case 11:
+                        faultname = "FAULT_ACTUATOR_LWHEEL_SETZERO";
+                        break;
+                    case 12:
+                        faultname = "FAULT_ACTUATOR_RWHEEL_SETZERO";
+                        break;
+                    case 13:
+                        faultname = "FAULT_ACTUATOR_BWHEELS_SETZERO";
+                        break;
+                    case 14:
+                        faultname = "FAULT_SOFTWARE";
+                        break;
+                    case 15:
+                        faultname = "FAULT_POWER_FAILURE";
+                        break;
+                }
+
+                if (b_damagedrobot && !printedFaultStatus){
+                    std::cout << "Robot " << GetId() << " is injected with " << faultname << std::endl;
+                    printedFaultStatus = true;
+                }
+
             }
         } else
             (*i)->Suppress();
@@ -546,7 +602,6 @@ void CEPuckForaging::RunGeneralFaults()
     {
         CCircleBehavior* pcCircleBehavior = new CCircleBehavior();
         m_vecBehaviors.push_back(pcCircleBehavior);
-
     }
     else //m_sExpRun.FBehavior == ExperimentToRun::FAULT_STOP
     {}

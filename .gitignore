@@ -4,5 +4,6 @@ build/
 **/CMakeLists.txt.user*
 *.swp
 logs
+results/
 
 .catkin_tools

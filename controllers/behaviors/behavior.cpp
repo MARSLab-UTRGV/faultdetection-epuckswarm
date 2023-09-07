@@ -35,6 +35,14 @@ void CBehavior::PrintBehaviorIdentity()
 /******************************************************************************/
 /******************************************************************************/
 
+std::string CBehavior::GetBehaviorIdentity()
+{
+    return "Behavior_X";
+}
+
+/******************************************************************************/
+/******************************************************************************/
+
 void CBehavior::WheelSpeedsFromHeadingVector(CVector2 &m_cHeadingVector, Real &fLeftWheelSpeed, Real &fRightWheelSpeed)
 {
     /* Get the heading angle */
