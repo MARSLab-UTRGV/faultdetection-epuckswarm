@@ -39,7 +39,7 @@
       </sensors>
       <params>
         <experiment_run swarm_behavior="SWARM_FORAGING"
-			fault_behavior="FAULT_NONE" 
+			fault_behavior="FAULT_CIRCLE" 
 	                id_faulty_robot="15" />
         <wheel_turning max_speed="5" />
         <state initial_rest_to_explore_prob="0.1"
@@ -122,7 +122,7 @@
   <!-- ****************** -->
   <!-- * Visualization * -->
   <!-- ****************** -->
-  <!-- <visualization>
+  <visualization>
     <qt-opengl>
       <camera>
         <placement idx="0"
@@ -136,6 +136,6 @@
 
       <user_functions label="foraging_qt_user_functions" />
     </qt-opengl>
-  </visualization> -->
+  </visualization>
 
 </argos-configuration>

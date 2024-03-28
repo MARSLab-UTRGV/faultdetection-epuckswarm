@@ -23,7 +23,12 @@ void CForagingLoopFunctions::Init(TConfigurationNode& t_node)
     {
         TConfigurationNode& tForaging = GetNode(t_node, "foraging");
         /* Get a pointer to the floor entity */
-        m_pcFloor = &GetSpace().GetFloorEntity();
+        if (m_pcFloor == nullptr){
+            m_pcFloor = &GetSpace().GetFloorEntity();
+        } else {
+            LOGERR << "m_pcFloor is not null" << std::endl;
+        }
+        LOG << "Passed m_pcFloor initialization..." << std::endl;
         /* Get the number of food items we want to be scattered from XML */
         UInt32 unFoodItems;
         GetNodeAttribute(tForaging, "items", unFoodItems);
@@ -51,6 +56,7 @@ void CForagingLoopFunctions::Init(TConfigurationNode& t_node)
 
         /* Create a new RNG */
         m_pcRNG = CRandom::CreateRNG("argos");
+        LOG << "Passed RNG initialization..." << std::endl;
         /* Distribute uniformly the items in the environment */
         for(UInt32 i = 0; i < unFoodItems; ++i)
             m_cFoodPos.push_back(CVector2(m_pcRNG->Uniform(m_cForagingArenaSideX),
@@ -58,6 +64,7 @@ void CForagingLoopFunctions::Init(TConfigurationNode& t_node)
 
         /* Get the output file name from XML */
         GetNodeAttribute(tForaging, "output", m_strOutput);
+        LOG << "Passed output file initialization..." << std::endl;
         /* Open the file, erasing its contents */
         m_cOutput.open(m_strOutput.c_str(), std::ios_base::trunc | std::ios_base::out);
         //m_cOutput << "# clock\twalking\tresting\tcollected_food\tenergy" << std::endl;
@@ -73,6 +80,7 @@ void CForagingLoopFunctions::Init(TConfigurationNode& t_node)
     {
         u_num_epucks++;
     }
+    LOG << "Passed counting the number of robots in the swarm..." << std::endl;
 
     for(CSpace::TMapPerType::iterator it = m_cEpucks.begin(); it != m_cEpucks.end(); ++it)
     {
@@ -81,6 +89,7 @@ void CForagingLoopFunctions::Init(TConfigurationNode& t_node)
         CEPuckForaging& cController = dynamic_cast<CEPuckForaging&>(cEPuck.GetControllableEntity().GetController());
         cController.GetExperimentType().SetNumEPuckRobotsInSwarm(u_num_epucks);
     }
+    LOG << "Passed setting the number of robots in the swarm..." << std::endl;
 }
 
 /****************************************/
